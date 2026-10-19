@@ -24,8 +24,11 @@ jobs:
       with:
         packages: 'platform-tools'
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+    # ЭТОТ ШАГ ИСПРАВЛЯЕТ ОКОНЧАНИЯ СТРОК В ФАЙЛЕ GRADLEW
+    - name: Fix Gradlew Line Endings
+      run: |
+        sed -i 's/\r$//' gradlew
+        chmod +x gradlew
 
     - name: Build with Gradle
       run: ./gradlew assembleDebug
